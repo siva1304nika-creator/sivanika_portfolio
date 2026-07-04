@@ -1,0 +1,19 @@
+CREATE EMAILJS ACCOUNT (IMPORTANT)
+
+Go to 👉 https://www.emailjs.com/
+
+Sign up
+
+Create:
+
+Email Service (Gmail / Outlook)
+
+Email Template
+
+Copy these 3 values:
+
+SERVICE_ID
+
+TEMPLATE_ID
+
+PUBLIC_KEY
