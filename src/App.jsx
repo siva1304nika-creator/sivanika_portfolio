@@ -14,6 +14,7 @@ const Skills = lazy(() => import("./components/sections/Skills"));
 const Experience = lazy(() => import("./components/sections/Experience"));
 const Education = lazy(() => import("./components/sections/Education"));
 const Projects = lazy(() => import("./components/sections/Projects"));
+const DigitalMarketing = lazy(() => import("./components/sections/DigitalMarketing"));
 const Contact = lazy(() => import("./components/sections/Contact"));
 
 export default function App() {
@@ -38,6 +39,7 @@ export default function App() {
             <Experience />
             <Education />
             <Projects />
+            <DigitalMarketing />
             <Contact />
           </main>
         </>
