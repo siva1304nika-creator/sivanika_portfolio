@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
-import { useEffect, useRef, useState } from "react";
-import { Command, Menu, X, Sparkles } from "lucide-react";
+import { useEffect, useState } from "react";
+import { Command, Menu, X } from "lucide-react";
 import { useRouter } from "../../context/RouterContext";
 import CommandPalette from "./CommandPalette";
 
@@ -79,85 +79,90 @@ export default function Navbar() {
       />
 
       <motion.header
-        initial={{ y: -30, opacity: 0 }}
+        initial={{ y: -20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.7, ease: "easeOut" }}
-        className="fixed top-0 left-0 right-0 z-50 px-4 md:px-8 py-4 transition-all duration-300"
+        transition={{ duration: 0.6, ease: "easeOut" }}
+        className="fixed top-0 left-0 right-0 z-50 px-4 md:px-10 py-4 transition-all duration-300 pointer-events-none"
       >
         <div
-          className={`max-w-7xl mx-auto flex items-center justify-between px-5 md:px-7 py-3 rounded-2xl border transition-all duration-500 ${
+          className={`max-w-7xl mx-auto flex items-center justify-between px-6 py-2.5 rounded-2xl transition-all duration-500 pointer-events-auto ${
             isScrolled
-              ? "bg-zinc-950/80 backdrop-blur-2xl border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.8)]"
-              : "bg-zinc-950/40 backdrop-blur-xl border-white/[0.08]"
+              ? "bg-black/80 backdrop-blur-2xl border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.9)]"
+              : "bg-transparent"
           }`}
         >
-          {/* Brand / Logo */}
+          {/* Brand Logo */}
           <div
             onClick={() => handleScroll("home")}
-            className="flex items-center gap-2.5 cursor-pointer group select-none"
+            className="flex items-center gap-3 cursor-pointer group select-none"
           >
-            <div className="w-8 h-8 rounded-lg bg-orange-500/10 border border-orange-500/30 flex items-center justify-center text-orange-400 font-black text-sm group-hover:shadow-[0_0_15px_rgba(249,115,22,0.4)] group-hover:scale-105 transition-all">
+            <div className="w-9 h-9 rounded-xl border border-orange-500/40 bg-zinc-950/80 flex items-center justify-center text-orange-500 font-extrabold text-base shadow-[0_0_15px_rgba(249,115,22,0.3)] group-hover:shadow-[0_0_20px_rgba(249,115,22,0.6)] group-hover:scale-105 transition-all">
               S
             </div>
-            <div className="font-extrabold tracking-wider text-sm md:text-base text-white">
-              SIVANIKA <span className="text-orange-500">S</span>
+            <div
+              className="text-sm sm:text-base text-white font-normal"
+              style={{
+                fontFamily: "'Michroma', sans-serif",
+                letterSpacing: "1.5px",
+                textTransform: "uppercase",
+              }}
+            >
+              SIVANIKA <span className="text-white">S</span>
             </div>
           </div>
 
-          {/* Desktop Navigation Links with subtle orange glow/underline */}
-          <nav className="hidden lg:flex items-center gap-1 xl:gap-2">
+          {/* Desktop Navigation Links */}
+          <nav className="hidden lg:flex items-center gap-6 xl:gap-8">
             {navItems.map((item) => {
               const isActive = active === item.id;
               return (
                 <button
                   key={item.id}
                   onClick={() => handleScroll(item.id)}
-                  className={`relative px-3.5 py-1.5 text-xs font-semibold tracking-wider transition-colors duration-300 uppercase cursor-pointer ${
-                    isActive ? "text-white" : "text-white/50 hover:text-white/90"
+                  className={`relative py-1.5 text-xs font-bold tracking-widest uppercase transition-colors duration-300 cursor-pointer ${
+                    isActive
+                      ? "text-orange-500 drop-shadow-[0_0_10px_rgba(249,115,22,0.8)]"
+                      : "text-zinc-400 hover:text-white"
                   }`}
                 >
                   {item.label}
 
-                  {/* Subtle orange glow / underline active indicator */}
+                  {/* Active Orange Underline with Center Glowing Dot */}
                   {isActive && (
                     <motion.div
-                      layoutId="activeNavUnderline"
-                      className="absolute bottom-0 left-3 right-3 h-[2px] bg-gradient-to-r from-orange-500 to-amber-400 shadow-[0_0_10px_rgba(249,115,22,0.8)] rounded-full"
-                      transition={{ type: "spring", stiffness: 380, damping: 30 }}
-                    />
+                      layoutId="activeNavDotIndicator"
+                      className="absolute -bottom-1 left-0 right-0 flex items-center justify-center"
+                      transition={{ type: "spring", stiffness: 400, damping: 32 }}
+                    >
+                      <div className="relative w-full flex items-center justify-center">
+                        <div className="w-full h-[1.5px] bg-gradient-to-r from-transparent via-orange-500 to-transparent shadow-[0_0_8px_#f97316]" />
+                        <div className="absolute w-2 h-2 rounded-full bg-orange-500 shadow-[0_0_10px_#f97316]" />
+                      </div>
+                    </motion.div>
                   )}
                 </button>
               );
             })}
-
-            {/* Link to Marketing Agency Page */}
-            <button
-              onClick={() => navigate("/marketing")}
-              className="ml-2 px-3 py-1 text-[11px] font-bold uppercase tracking-wider rounded-lg bg-orange-500/10 border border-orange-500/25 text-orange-400 hover:bg-orange-500/20 hover:border-orange-500/50 transition-all cursor-pointer flex items-center gap-1"
-            >
-              <span>MARKETING</span>
-            </button>
           </nav>
 
-          {/* Right Action: ⌘ K Command Palette button */}
+          {/* Right Action: ⌘ K Command Palette */}
           <div className="flex items-center gap-3">
             <button
               onClick={() => setPaletteOpen(true)}
-              className="flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-white/[0.04] border border-white/10 hover:border-orange-500/40 hover:bg-orange-500/5 transition-all text-white/70 hover:text-white text-xs font-mono group cursor-pointer"
+              className="relative flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-zinc-950/80 border border-zinc-800 hover:border-orange-500/50 hover:bg-orange-500/10 transition-all text-zinc-300 hover:text-white text-xs font-mono group cursor-pointer shadow-[0_0_15px_rgba(0,0,0,0.5)]"
             >
+              {/* Notification orange dot */}
+              <span className="absolute -top-1 -right-1 w-2 h-2 rounded-full bg-orange-500 shadow-[0_0_8px_#f97316]" />
               <Command className="w-3.5 h-3.5 text-orange-400 group-hover:scale-110 transition-transform" />
-              <span className="hidden sm:inline text-[11px] font-medium text-white/60 group-hover:text-white/90">
+              <span className="text-[11px] font-medium text-zinc-400 group-hover:text-white tracking-wide">
                 Command Palette
               </span>
-              <kbd className="hidden sm:inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded bg-white/10 border border-white/15 text-[10px] text-white/70 font-semibold shadow-inner">
-                ⌘K
-              </kbd>
             </button>
 
             {/* Mobile Hamburger Toggle */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="lg:hidden p-2 rounded-xl bg-white/5 border border-white/10 text-white/80 hover:text-white"
+              className="lg:hidden p-2 rounded-xl bg-zinc-900 border border-zinc-800 text-zinc-300 hover:text-white"
             >
               {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>
@@ -170,7 +175,7 @@ export default function Navbar() {
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
-            className="lg:hidden mt-3 p-4 rounded-2xl bg-zinc-950/95 border border-white/10 backdrop-blur-2xl shadow-2xl flex flex-col gap-2 max-w-7xl mx-auto"
+            className="lg:hidden mt-3 p-4 rounded-2xl bg-black/95 border border-zinc-800 backdrop-blur-2xl shadow-2xl flex flex-col gap-2 max-w-7xl mx-auto pointer-events-auto"
           >
             {navItems.map((item) => (
               <button
@@ -179,14 +184,14 @@ export default function Navbar() {
                 className={`w-full text-left px-4 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider transition-colors ${
                   active === item.id
                     ? "bg-orange-500/15 text-orange-400 border border-orange-500/30"
-                    : "text-white/70 hover:bg-white/5 hover:text-white"
+                    : "text-zinc-300 hover:bg-white/5 hover:text-white"
                 }`}
               >
                 {item.label}
               </button>
             ))}
 
-            <div className="pt-2 border-t border-white/10 mt-1 flex flex-col gap-2">
+            <div className="pt-2 border-t border-zinc-800 mt-1 flex flex-col gap-2">
               <button
                 onClick={() => {
                   setMobileMenuOpen(false);
