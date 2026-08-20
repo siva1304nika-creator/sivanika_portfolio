@@ -7,8 +7,9 @@ import {
   Workflow, ArrowRight, ExternalLink, ShieldCheck, Compass, Sparkles,
   Award, HeartHandshake, PhoneCall, Code, Layers, Zap, Check
 } from "lucide-react";
-import { FaFacebook, FaInstagram, FaLinkedin } from "react-icons/fa";
+import { FaFacebook, FaInstagram, FaLinkedin, FaWhatsapp } from "react-icons/fa";
 import TiltWrapper from "../TiltWrapper";
+import { useRouter } from "../../context/RouterContext";
 
 // --- ANIMATED COUNTER COMPONENT ---
 function Counter({ value, duration = 1.5 }) {
@@ -317,9 +318,20 @@ function DashCard({ children, delay = 0, glowColor = "rgba(249,115,22,0.1)", ora
 
 
 export default function DigitalMarketing() {
-
+  const { navigate } = useRouter();
   const [activeCategory, setActiveCategory] = useState("All");
   const [activeProject, setActiveProject] = useState(null);
+  const [inquiryStatus, setInquiryStatus] = useState("");
+  const formRef = useRef(null);
+
+  const handleInquirySubmit = (e) => {
+    e.preventDefault();
+    setInquiryStatus("sending");
+    setTimeout(() => {
+      setInquiryStatus("success");
+      if (formRef.current) formRef.current.reset();
+    }, 800);
+  };
 
   // Filter services based on category selection
   const filteredServices = activeCategory === "All" 
@@ -328,8 +340,8 @@ export default function DigitalMarketing() {
 
   return (
     <section
-      id="marketing"
-      className="relative w-full overflow-hidden bg-black text-white py-20 scroll-mt-24"
+      id="marketing-hero"
+      className="relative w-full overflow-hidden bg-black text-white pt-24 pb-20 scroll-mt-24"
     >
       {/* Background blobs for depth */}
       <div className="absolute top-10 left-10 w-96 h-96 bg-orange-600/5 rounded-full blur-[140px] pointer-events-none" />
@@ -439,7 +451,7 @@ export default function DigitalMarketing() {
               className="mt-8 flex flex-wrap gap-4"
             >
               <motion.a
-                href="#contact"
+                href="#marketing-contact"
                 whileHover={{ scale: 1.04 }}
                 whileTap={{ scale: 0.97 }}
                 className="px-8 py-3.5 rounded-full bg-gradient-to-r from-orange-500 to-orange-600
@@ -660,7 +672,7 @@ export default function DigitalMarketing() {
       </div>
 
       {/* ================= TEAM SECTION ================= */}
-      <div className="relative max-w-7xl mx-auto px-6 md:px-10 py-16">
+      <div id="team" className="relative max-w-7xl mx-auto px-6 md:px-10 py-16 scroll-mt-24">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           <motion.div
             initial={{ opacity: 0, x: -40 }}
@@ -854,7 +866,7 @@ export default function DigitalMarketing() {
       </div>
 
       {/* ================= HOW WE WORK SECTION ================= */}
-      <div className="relative max-w-7xl mx-auto px-6 md:px-10 py-20">
+      <div id="workflow" className="relative max-w-7xl mx-auto px-6 md:px-10 py-20 scroll-mt-24">
 
         {/* Section Header */}
         <div className="flex flex-col items-center text-center mb-20">
@@ -1053,7 +1065,7 @@ export default function DigitalMarketing() {
 
 
       {/* ================= TOOLS & PLATFORMS ================= */}
-      <div className="relative max-w-7xl mx-auto px-6 md:px-10 py-16">
+      <div id="tools" className="relative max-w-7xl mx-auto px-6 md:px-10 py-16 scroll-mt-24">
         <div className="flex flex-col items-center text-center mb-12">
           <motion.h2 
             initial={{ opacity: 0, y: 15 }}
@@ -1097,7 +1109,7 @@ export default function DigitalMarketing() {
       </div>
 
       {/* ================= FEATURED PROJECTS ================= */}
-      <div id="marketing-projects" className="relative max-w-7xl mx-auto px-6 md:px-10 py-16 scroll-mt-24">
+      <div id="case-studies" className="relative max-w-7xl mx-auto px-6 md:px-10 py-16 scroll-mt-24">
         <div className="flex flex-col items-center text-center mb-16">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -1166,7 +1178,7 @@ export default function DigitalMarketing() {
       </div>
 
       {/* ================= WHY CHOOSE OUR TEAM ================= */}
-      <div className="relative max-w-7xl mx-auto px-6 md:px-10 py-16">
+      <div id="why-us" className="relative max-w-7xl mx-auto px-6 md:px-10 py-16 scroll-mt-24">
         <div className="flex flex-col items-center text-center mb-16">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -1207,48 +1219,217 @@ export default function DigitalMarketing() {
         </div>
       </div>
 
-      {/* ================= CALL TO ACTION ================= */}
-      <div className="relative max-w-5xl mx-auto px-6 md:px-10 py-16 mb-12">
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="relative rounded-[32px] bg-gradient-to-r from-zinc-950 via-[#101010] to-zinc-950 border border-white/10 p-8 md:p-14 text-center overflow-hidden"
-        >
-          {/* Accent Blobs inside CTA */}
-          <div className="absolute -top-32 -left-32 w-64 h-64 bg-orange-500/10 rounded-full blur-[100px] pointer-events-none" />
-          <div className="absolute -bottom-32 -right-32 w-64 h-64 bg-orange-600/10 rounded-full blur-[100px] pointer-events-none" />
+      {/* ================= CALL TO ACTION & CONTACT ================= */}
+      <div id="marketing-contact" className="relative max-w-7xl mx-auto px-6 md:px-10 py-20 scroll-mt-24">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+          {/* Left CTA Information */}
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="lg:col-span-5 flex flex-col items-start"
+          >
+            <div className="flex items-center gap-2 px-4 py-1.5 rounded-full bg-orange-500/10 border border-orange-500/30 text-orange-400 text-xs font-semibold uppercase tracking-widest mb-6">
+              <Sparkles className="w-3.5 h-3.5" />
+              Let's Connect
+            </div>
 
-          <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-white mb-6">
-            Let's Grow Your <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-orange-600">Business Together</span>
-          </h2>
-          <p className="max-w-2xl mx-auto text-white/70 text-base md:text-lg leading-relaxed mb-10">
-            As a team of two digital marketing professionals, we partner with businesses to improve online visibility, 
-            generate quality leads, increase conversions, and build a stronger digital presence through strategic marketing solutions.
-          </p>
-          <div className="flex flex-wrap gap-4 justify-center">
-            <a
-              href="#contact"
-              className="px-8 py-3.5 rounded-full bg-gradient-to-r from-orange-400 to-orange-600 text-black font-bold hover:shadow-[0_0_20px_rgba(249,115,22,0.4)] transition-all duration-300 transform hover:-translate-y-0.5"
-            >
-              Hire Our Team
-            </a>
-            <a
-              href="#marketing-projects"
-              className="px-8 py-3.5 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 transition-colors font-semibold text-white"
-            >
-              View Our Work
-            </a>
-            <a
-              href="#contact"
-              className="px-8 py-3.5 rounded-full bg-zinc-900 border border-white/5 hover:border-white/15 transition-colors font-semibold text-white/80"
-            >
-              Contact Us
-            </a>
-          </div>
-        </motion.div>
+            <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight text-white leading-tight">
+              Ready to Accelerate Your{" "}
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 via-orange-500 to-amber-400">
+                Digital Growth?
+              </span>
+            </h2>
+
+            <p className="mt-5 text-white/65 text-base md:text-lg leading-relaxed">
+              Whether you need a full SEO audit, a high-converting PPC campaign, or a custom digital growth blueprint, our team is ready to deliver measurable ROI.
+            </p>
+
+            <div className="mt-8 space-y-4 w-full">
+              <a
+                href="https://wa.me/919940440767"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-4 p-4 rounded-2xl bg-white/[0.02] border border-white/10 hover:border-orange-500/40 hover:bg-orange-500/5 transition-all group"
+              >
+                <div className="w-12 h-12 rounded-full bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 text-xl group-hover:scale-110 transition-transform">
+                  <FaWhatsapp />
+                </div>
+                <div>
+                  <p className="text-[11px] font-semibold text-white/40 uppercase tracking-wider">Quick WhatsApp Chat</p>
+                  <p className="text-sm font-bold text-white group-hover:text-emerald-400 transition-colors">+91 99404 40767</p>
+                </div>
+              </a>
+
+              <a
+                href="mailto:sivanika2025@gmail.com"
+                className="flex items-center gap-4 p-4 rounded-2xl bg-white/[0.02] border border-white/10 hover:border-orange-500/40 hover:bg-orange-500/5 transition-all group"
+              >
+                <div className="w-12 h-12 rounded-full bg-orange-500/10 border border-orange-500/20 flex items-center justify-center text-orange-400 text-xl group-hover:scale-110 transition-transform">
+                  <Mail className="w-5 h-5" />
+                </div>
+                <div>
+                  <p className="text-[11px] font-semibold text-white/40 uppercase tracking-wider">Direct Email</p>
+                  <p className="text-sm font-bold text-white group-hover:text-orange-400 transition-colors">sivanika2025@gmail.com</p>
+                </div>
+              </a>
+            </div>
+
+            <div className="mt-8 flex gap-3">
+              <a
+                href="https://www.linkedin.com/in/sivanika"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-11 h-11 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white/70 hover:text-white hover:bg-orange-500/20 hover:border-orange-500/40 transition-all text-lg"
+              >
+                <FaLinkedin />
+              </a>
+              <a
+                href="https://www.facebook.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-11 h-11 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white/70 hover:text-white hover:bg-orange-500/20 hover:border-orange-500/40 transition-all text-lg"
+              >
+                <FaFacebook />
+              </a>
+              <a
+                href="https://www.instagram.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-11 h-11 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white/70 hover:text-white hover:bg-orange-500/20 hover:border-orange-500/40 transition-all text-lg"
+              >
+                <FaInstagram />
+              </a>
+            </div>
+          </motion.div>
+
+          {/* Right Marketing Inquiry Form */}
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="lg:col-span-7"
+          >
+            <div className="relative p-8 md:p-10 rounded-[32px] bg-zinc-950/80 border border-white/10 backdrop-blur-2xl shadow-[0_0_50px_rgba(0,0,0,0.6)] overflow-hidden">
+              <div className="absolute top-0 right-0 -mr-20 -mt-20 w-60 h-60 bg-orange-500/10 rounded-full blur-3xl pointer-events-none" />
+
+              <h3 className="text-2xl font-bold text-white mb-2">Request Free Marketing Audit & Proposal</h3>
+              <p className="text-white/50 text-sm mb-8">Fill in your details and we will analyze your website & marketing strategy within 24 hours.</p>
+
+              <form ref={formRef} onSubmit={handleInquirySubmit} className="space-y-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div>
+                    <label className="block text-xs font-semibold text-white/60 uppercase tracking-wider mb-2">Your Name</label>
+                    <input
+                      type="text"
+                      required
+                      placeholder="John Doe"
+                      className="w-full px-4 py-3 rounded-xl bg-white/[0.03] border border-white/10 text-white placeholder-white/30 focus:border-orange-500 outline-none transition-colors text-sm"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-semibold text-white/60 uppercase tracking-wider mb-2">Business Email</label>
+                    <input
+                      type="email"
+                      required
+                      placeholder="john@company.com"
+                      className="w-full px-4 py-3 rounded-xl bg-white/[0.03] border border-white/10 text-white placeholder-white/30 focus:border-orange-500 outline-none transition-colors text-sm"
+                    />
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div>
+                    <label className="block text-xs font-semibold text-white/60 uppercase tracking-wider mb-2">Website / Social URL</label>
+                    <input
+                      type="text"
+                      placeholder="https://yourwebsite.com"
+                      className="w-full px-4 py-3 rounded-xl bg-white/[0.03] border border-white/10 text-white placeholder-white/30 focus:border-orange-500 outline-none transition-colors text-sm"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-semibold text-white/60 uppercase tracking-wider mb-2">Service Needed</label>
+                    <select
+                      className="w-full px-4 py-3 rounded-xl bg-zinc-900 border border-white/10 text-white focus:border-orange-500 outline-none transition-colors text-sm"
+                      defaultValue="SEO & Search"
+                    >
+                      <option value="SEO & Search">Technical & Local SEO</option>
+                      <option value="Paid Ads">Google & Meta Ads</option>
+                      <option value="Social Media">Social Media Growth</option>
+                      <option value="Full Strategy">Complete Digital Marketing Growth</option>
+                      <option value="Web & SEO">Web Development + SEO</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-xs font-semibold text-white/60 uppercase tracking-wider mb-2">Project Goals & Message</label>
+                  <textarea
+                    rows={4}
+                    required
+                    placeholder="Tell us about your current traffic, target audience, and business growth goals..."
+                    className="w-full px-4 py-3 rounded-xl bg-white/[0.03] border border-white/10 text-white placeholder-white/30 focus:border-orange-500 outline-none transition-colors text-sm resize-none"
+                  />
+                </div>
+
+                <button
+                  type="submit"
+                  disabled={inquiryStatus === "sending"}
+                  className="w-full py-4 rounded-full bg-gradient-to-r from-orange-500 to-orange-600 text-black font-bold text-base hover:shadow-[0_0_25px_rgba(249,115,22,0.4)] hover:scale-[1.01] active:scale-[0.99] disabled:opacity-70 transition-all cursor-pointer"
+                >
+                  {inquiryStatus === "sending" ? "Submitting Inquiry..." : "Claim Free Audit & Strategy Call"}
+                </button>
+
+                {inquiryStatus === "success" && (
+                  <motion.p
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="p-3 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-medium text-center"
+                  >
+                    Thank you! Your inquiry has been received. Our marketing lead will reach out to you within 24 hours. ✅
+                  </motion.p>
+                )}
+              </form>
+            </div>
+          </motion.div>
+        </div>
       </div>
+
+      {/* ================= AGENCY FOOTER ================= */}
+      <footer className="relative mt-20 pt-12 pb-16 border-t border-white/10 bg-black">
+        <div className="max-w-7xl mx-auto px-6 md:px-10 flex flex-col md:flex-row items-center justify-between gap-6">
+          <div className="flex flex-col items-center md:items-start">
+            <div className="flex items-center gap-2 font-bold text-lg text-white">
+              <span className="w-3 h-3 rounded-full bg-orange-500" />
+              Siva & Madhan <span className="text-orange-400 font-normal">| Growth Partners</span>
+            </div>
+            <p className="text-xs text-white/40 mt-1">
+              Data-driven Technical SEO, Meta/Google Ads & Growth Marketing Agency
+            </p>
+          </div>
+
+          <div className="flex flex-wrap items-center justify-center gap-6 text-xs text-white/60">
+            <a href="#services" className="hover:text-orange-400 transition-colors">Services</a>
+            <a href="#workflow" className="hover:text-orange-400 transition-colors">Workflow</a>
+            <a href="#tools" className="hover:text-orange-400 transition-colors">Tools</a>
+            <a href="#case-studies" className="hover:text-orange-400 transition-colors">Case Studies</a>
+            <button
+              onClick={() => navigate("/")}
+              className="text-orange-400 font-bold hover:underline cursor-pointer"
+            >
+              ← Back to Developer Portfolio
+            </button>
+          </div>
+
+          <p className="text-xs text-white/30">
+            © {new Date().getFullYear()} All rights reserved.
+          </p>
+        </div>
+      </footer>
 
       {/* ================= CASE STUDY MODAL ================= */}
       <AnimatePresence>
@@ -1332,14 +1513,14 @@ export default function DigitalMarketing() {
               <div className="mt-10 flex gap-4">
                 <button
                   onClick={() => setActiveProject(null)}
-                  className="flex-1 py-3 md:py-4 rounded-full bg-white/5 text-white font-semibold hover:bg-white/10 transition-colors border border-white/10"
+                  className="flex-1 py-3 md:py-4 rounded-full bg-white/5 text-white font-semibold hover:bg-white/10 transition-colors border border-white/10 cursor-pointer"
                 >
                   Close Case Study
                 </button>
                 <a
-                  href="#contact"
+                  href="#marketing-contact"
                   onClick={() => setActiveProject(null)}
-                  className="flex-1 text-center py-3 md:py-4 rounded-full bg-gradient-to-r from-orange-400 to-orange-600 text-black font-bold hover:shadow-[0_0_20px_rgba(249,115,22,0.4)] transition-shadow"
+                  className="flex-1 text-center py-3 md:py-4 rounded-full bg-gradient-to-r from-orange-400 to-orange-600 text-black font-bold hover:shadow-[0_0_20px_rgba(249,115,22,0.4)] transition-shadow cursor-pointer"
                 >
                   Discuss Project
                 </a>

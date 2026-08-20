@@ -1,56 +1,56 @@
 import { motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
+import { Command, Menu, X, Sparkles } from "lucide-react";
+import { useRouter } from "../../context/RouterContext";
+import CommandPalette from "./CommandPalette";
 
 const navItems = [
-  { label: "Home", id: "home" },
-  { label: "About", id: "about" },
-  { label: "Skills", id: "skills" },
-  { label: "Experience", id: "experience" },
-  { label: "Education", id: "education" },
-  { label: "Projects", id: "projects" },
-  { label: "Marketing", id: "marketing" },
-  { label: "Contact", id: "contact" },
+  { label: "HOME", id: "home" },
+  { label: "ABOUT", id: "about" },
+  { label: "SKILLS", id: "skills" },
+  { label: "EXPERIENCE", id: "experience" },
+  { label: "PROJECTS", id: "projects" },
+  { label: "CONTACT", id: "contact" },
 ];
 
 export default function Navbar() {
   const [active, setActive] = useState("home");
-  const [indicator, setIndicator] = useState({ left: 0, width: 0 });
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [paletteOpen, setPaletteOpen] = useState(false);
+  const { navigate } = useRouter();
 
-  const itemRefs = useRef({});
-  const listRef = useRef(null);
+  // Scroll detection for navbar background opacity
+  useEffect(() => {
+    const handleScrollPos = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
+    window.addEventListener("scroll", handleScrollPos);
+    return () => window.removeEventListener("scroll", handleScrollPos);
+  }, []);
+
+  // Global shortcut for Command Palette (⌘K / Ctrl+K)
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") {
+        e.preventDefault();
+        setPaletteOpen((prev) => !prev);
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, []);
 
   const handleScroll = (id) => {
     setActive(id);
+    setMobileMenuOpen(false);
     document.getElementById(id)?.scrollIntoView({
       behavior: "smooth",
       block: "start",
     });
   };
 
-  // ✅ Update indicator (robust version using offsetLeft)
-  const updateIndicator = () => {
-    const el = itemRefs.current[active];
-    const list = listRef.current;
-
-    if (el && list) {
-      const left = el.offsetLeft;
-      const width = el.offsetWidth;
-
-      setIndicator({ left, width });
-
-      // ✅ Center active item in the scrollable list
-      const scrollLeft = el.offsetLeft - list.offsetWidth / 2 + el.offsetWidth / 2;
-      list.scrollTo({ left: scrollLeft, behavior: "smooth" });
-    }
-  };
-
-  useEffect(() => {
-    updateIndicator();
-    window.addEventListener("resize", updateIndicator);
-    return () => window.removeEventListener("resize", updateIndicator);
-  }, [active]);
-
-  // ✅ Auto-highlight on scroll
+  // Auto-highlight section on scroll
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -60,7 +60,7 @@ export default function Navbar() {
           }
         });
       },
-      { rootMargin: "-40% 0px -40% 0px" } // Balanced margins
+      { rootMargin: "-35% 0px -35% 0px" }
     );
 
     navItems.forEach((item) => {
@@ -72,71 +72,134 @@ export default function Navbar() {
   }, []);
 
   return (
-    <motion.nav
-      initial={{ y: -20, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.8, ease: "easeOut" }}
-      className="
-        fixed z-50
-        top-6
-        left-1/2 -translate-x-1/2
-        w-fit max-w-[95vw]
-      "
-    >
-      <div
-        className="
-          relative
-          backdrop-blur-2xl bg-zinc-950/40
-          border border-white/10
-          rounded-full
-          shadow-[0_8px_32px_0_rgba(0,0,0,0.8)]
-          overflow-hidden
-        "
-      >
-        <ul
-          ref={listRef}
-          className="
-            relative z-10
-            flex items-center
-            gap-1 md:gap-4
-            p-1.5 md:p-2
-            text-xs md:text-sm font-medium text-white/50
-            overflow-x-auto scrollbar-hide
-            whitespace-nowrap
-            select-none
-          "
-        >
-          {/* 🔥 ACTIVE PILL INDICATOR (Moved inside the scrollable UL) */}
-          <motion.div
-            className="
-              absolute top-1/2 -translate-y-1/2
-              h-[75%]
-              rounded-full
-              bg-gradient-to-r from-orange-500 to-orange-700
-              shadow-lg shadow-orange-500/20
-              pointer-events-none z-[-1]
-            "
-            animate={{ left: indicator.left, width: indicator.width }}
-            transition={{ type: "spring", stiffness: 350, damping: 30 }}
-          />
+    <>
+      <CommandPalette
+        isOpen={paletteOpen}
+        onClose={() => setPaletteOpen(false)}
+      />
 
-          {navItems.map((item) => (
-            <li
-              key={item.id}
-              ref={(el) => (itemRefs.current[item.id] = el)}
-              onClick={() => handleScroll(item.id)}
-              className={`
-                px-4 py-2 md:px-6 md:py-2.5
-                rounded-full
-                cursor-pointer transition-all duration-300 uppercase tracking-tighter
-                ${active === item.id ? "text-white" : "hover:text-white/80 hover:bg-white/5"}
-              `}
+      <motion.header
+        initial={{ y: -30, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.7, ease: "easeOut" }}
+        className="fixed top-0 left-0 right-0 z-50 px-4 md:px-8 py-4 transition-all duration-300"
+      >
+        <div
+          className={`max-w-7xl mx-auto flex items-center justify-between px-5 md:px-7 py-3 rounded-2xl border transition-all duration-500 ${
+            isScrolled
+              ? "bg-zinc-950/80 backdrop-blur-2xl border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.8)]"
+              : "bg-zinc-950/40 backdrop-blur-xl border-white/[0.08]"
+          }`}
+        >
+          {/* Brand / Logo */}
+          <div
+            onClick={() => handleScroll("home")}
+            className="flex items-center gap-2.5 cursor-pointer group select-none"
+          >
+            <div className="w-8 h-8 rounded-lg bg-orange-500/10 border border-orange-500/30 flex items-center justify-center text-orange-400 font-black text-sm group-hover:shadow-[0_0_15px_rgba(249,115,22,0.4)] group-hover:scale-105 transition-all">
+              S
+            </div>
+            <div className="font-extrabold tracking-wider text-sm md:text-base text-white">
+              SIVANIKA <span className="text-orange-500">S</span>
+            </div>
+          </div>
+
+          {/* Desktop Navigation Links with subtle orange glow/underline */}
+          <nav className="hidden lg:flex items-center gap-1 xl:gap-2">
+            {navItems.map((item) => {
+              const isActive = active === item.id;
+              return (
+                <button
+                  key={item.id}
+                  onClick={() => handleScroll(item.id)}
+                  className={`relative px-3.5 py-1.5 text-xs font-semibold tracking-wider transition-colors duration-300 uppercase cursor-pointer ${
+                    isActive ? "text-white" : "text-white/50 hover:text-white/90"
+                  }`}
+                >
+                  {item.label}
+
+                  {/* Subtle orange glow / underline active indicator */}
+                  {isActive && (
+                    <motion.div
+                      layoutId="activeNavUnderline"
+                      className="absolute bottom-0 left-3 right-3 h-[2px] bg-gradient-to-r from-orange-500 to-amber-400 shadow-[0_0_10px_rgba(249,115,22,0.8)] rounded-full"
+                      transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                    />
+                  )}
+                </button>
+              );
+            })}
+
+            {/* Link to Marketing Agency Page */}
+            <button
+              onClick={() => navigate("/marketing")}
+              className="ml-2 px-3 py-1 text-[11px] font-bold uppercase tracking-wider rounded-lg bg-orange-500/10 border border-orange-500/25 text-orange-400 hover:bg-orange-500/20 hover:border-orange-500/50 transition-all cursor-pointer flex items-center gap-1"
             >
-              {item.label}
-            </li>
-          ))}
-        </ul>
-      </div>
-    </motion.nav>
+              <span>MARKETING</span>
+            </button>
+          </nav>
+
+          {/* Right Action: ⌘ K Command Palette button */}
+          <div className="flex items-center gap-3">
+            <button
+              onClick={() => setPaletteOpen(true)}
+              className="flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-white/[0.04] border border-white/10 hover:border-orange-500/40 hover:bg-orange-500/5 transition-all text-white/70 hover:text-white text-xs font-mono group cursor-pointer"
+            >
+              <Command className="w-3.5 h-3.5 text-orange-400 group-hover:scale-110 transition-transform" />
+              <span className="hidden sm:inline text-[11px] font-medium text-white/60 group-hover:text-white/90">
+                Command Palette
+              </span>
+              <kbd className="hidden sm:inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded bg-white/10 border border-white/15 text-[10px] text-white/70 font-semibold shadow-inner">
+                ⌘K
+              </kbd>
+            </button>
+
+            {/* Mobile Hamburger Toggle */}
+            <button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="lg:hidden p-2 rounded-xl bg-white/5 border border-white/10 text-white/80 hover:text-white"
+            >
+              {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            </button>
+          </div>
+        </div>
+
+        {/* Mobile Menu Dropdown */}
+        {mobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            className="lg:hidden mt-3 p-4 rounded-2xl bg-zinc-950/95 border border-white/10 backdrop-blur-2xl shadow-2xl flex flex-col gap-2 max-w-7xl mx-auto"
+          >
+            {navItems.map((item) => (
+              <button
+                key={item.id}
+                onClick={() => handleScroll(item.id)}
+                className={`w-full text-left px-4 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider transition-colors ${
+                  active === item.id
+                    ? "bg-orange-500/15 text-orange-400 border border-orange-500/30"
+                    : "text-white/70 hover:bg-white/5 hover:text-white"
+                }`}
+              >
+                {item.label}
+              </button>
+            ))}
+
+            <div className="pt-2 border-t border-white/10 mt-1 flex flex-col gap-2">
+              <button
+                onClick={() => {
+                  setMobileMenuOpen(false);
+                  navigate("/marketing");
+                }}
+                className="w-full text-left px-4 py-2.5 rounded-xl bg-orange-500/10 border border-orange-500/30 text-orange-400 text-xs font-bold uppercase tracking-wider flex items-center justify-between"
+              >
+                <span>Digital Marketing Agency</span>
+              </button>
+            </div>
+          </motion.div>
+        )}
+      </motion.header>
+    </>
   );
 }

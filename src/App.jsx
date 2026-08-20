@@ -1,24 +1,13 @@
 import { useState, useEffect } from "react";
-import { lazy, Suspense } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import Loader from "./components/loader/Loader";
-import Navbar from "./components/layout/Navbar";
-// import Hero from "./components/hero/Hero";
-// import About from "./components/sections/About";
-// import Skills from "./components/sections/Skills";
-// import Projects from "./components/sections/Projects";
-// import Contact from "./components/sections/Contact";
+import MainPortfolio from "./pages/MainPortfolio";
+import MarketingPage from "./pages/MarketingPage";
+import { RouterProvider, useRouter } from "./context/RouterContext";
 
-const Hero = lazy(() => import("./components/hero/Hero"));
-const About = lazy(() => import("./components/sections/About"));
-const Skills = lazy(() => import("./components/sections/Skills"));
-const Experience = lazy(() => import("./components/sections/Experience"));
-const Education = lazy(() => import("./components/sections/Education"));
-const Projects = lazy(() => import("./components/sections/Projects"));
-const DigitalMarketing = lazy(() => import("./components/sections/DigitalMarketing"));
-const Contact = lazy(() => import("./components/sections/Contact"));
-
-export default function App() {
+function AppContent() {
   const [loading, setLoading] = useState(true);
+  const { currentPath } = useRouter();
 
   useEffect(() => {
     document.body.style.overflow = loading ? "hidden" : "auto";
@@ -29,21 +18,39 @@ export default function App() {
       {loading && <Loader onFinish={() => setLoading(false)} />}
 
       {!loading && (
-        <>
-          <Navbar />
-
-          <main className="bg-black text-white">
-            <Hero />
-            <About />
-            <Skills />
-            <Experience />
-            <Education />
-            <Projects />
-            <DigitalMarketing />
-            <Contact />
-          </main>
-        </>
+        <AnimatePresence mode="wait">
+          {currentPath === "/marketing" ? (
+            <motion.div
+              key="marketing-page"
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -15 }}
+              transition={{ duration: 0.45, ease: "easeInOut" }}
+            >
+              <MarketingPage />
+            </motion.div>
+          ) : (
+            <motion.div
+              key="portfolio-page"
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -15 }}
+              transition={{ duration: 0.45, ease: "easeInOut" }}
+            >
+              <MainPortfolio />
+            </motion.div>
+          )}
+        </AnimatePresence>
       )}
     </>
   );
 }
+
+export default function App() {
+  return (
+    <RouterProvider>
+      <AppContent />
+    </RouterProvider>
+  );
+}
+

@@ -5,10 +5,29 @@ import TiltWrapper from "../TiltWrapper";
 
 const projects = [
   {
+    title: "AI Voice Call Automation",
+    short: "AI-Powered Voice Calling Automation",
+    desc: "Building an AI-powered voice calling automation system using n8n and OpenAI to automate customer call handling, responses, and follow-ups.",
+    tech: ["n8n Automation", "OpenAI API", "Voice AI", "Webhooks", "Node.js"],
+    image: "https://images.unsplash.com/photo-1589254065878-42c9da997008?q=80&w=800&auto=format&fit=crop",
+    github: "https://github.com/siva1304nika-creator",
+    live: "#",
+    ongoing: true,
+  },
+  {
+    title: "Product Delivery App",
+    short: "Cross-Platform Delivery Mobile App",
+    desc: "Developing a cross-platform product delivery mobile application using React Native with order tracking, API integration, and real-time status updates.",
+    tech: ["React Native", "JavaScript", "REST APIs", "Real-Time Tracking", "Mobile UI"],
+    image: "https://images.unsplash.com/photo-1526367790999-0150786686a2?q=80&w=800&auto=format&fit=crop",
+    github: "https://github.com/siva1304nika-creator",
+    live: "#",
+    ongoing: true,
+  },
+  {
     title: "SRT Convertor",
-
     short: "SRT Converter Web Application",
-    desc: "A AI based web application developed to share and manage moral stories. Features backend APIs integrated with a dynamic frontend for a seamless user experience.",
+    desc: "An AI based web application developed to convert and process SRT subtitle files. Features backend APIs integrated with a dynamic frontend for a seamless user experience.",
     tech: ["HTML", "CSS", "JavaScript", "Tailwind CSS", "Express.js", "Anthropic API"],
     image: "/projects/srt.png",
     github: "https://github.com/siva1304nika-creator",
@@ -133,7 +152,7 @@ export default function Projects() {
             Featured <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-orange-600">Projects</span>
           </h2>
           <p className="mt-6 max-w-2xl text-white/60 text-lg">
-            Selected work showcasing my approach to design, interaction, and full-stack engineering.
+            Selected work showcasing full-stack engineering, AI voice automation, React Native mobile apps, and interactive web applications.
           </p>
         </motion.div>
 
@@ -145,58 +164,89 @@ export default function Projects() {
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: i * 0.1, type: "spring", bounce: 0.3 }}
+              transition={{ delay: i * 0.08, type: "spring", bounce: 0.3 }}
               className="relative group w-full cursor-pointer"
               onClick={() => setActiveProject(project)}
             >
               <TiltWrapper maxRotation={12} zTranslate={30}>
-                <div className="relative rounded-[24px] bg-white/[0.02] backdrop-blur-xl border border-white/10 overflow-hidden transition-all duration-500 group-hover:border-transparent group-hover:shadow-[0_15px_40px_-10px_rgba(249,115,22,0.3)] h-full">
+                <div className="relative rounded-[24px] bg-white/[0.02] backdrop-blur-xl border border-white/10 overflow-hidden transition-all duration-500 group-hover:border-transparent group-hover:shadow-[0_15px_40px_-10px_rgba(249,115,22,0.3)] h-full flex flex-col justify-between">
                   {/* Animated gradient border */}
                   <div className="absolute inset-0 rounded-[24px] border-2 border-transparent bg-gradient-to-r from-orange-400 to-orange-600 opacity-0 group-hover:opacity-40 transition-opacity duration-500 pointer-events-none z-20" style={{ WebkitMask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)", WebkitMaskComposite: "xor", padding: "2px" }} />
                   
-                  {/* PROJECT IMAGE */}
-                  <div className="relative h-56 overflow-hidden" style={{ transform: "translateZ(40px)" }}>
-                    <div className="absolute inset-0 bg-orange-500/10 group-hover:bg-transparent transition-colors duration-500 z-10" />
-                    <img
-                      src={project.image}
-                      alt={project.title}
-                      className="w-full h-full object-cover group-hover:scale-110 transition duration-700 ease-out"
-                    />
+                  <div>
+                    {/* PROJECT IMAGE */}
+                    <div className="relative h-56 overflow-hidden" style={{ transform: "translateZ(40px)" }}>
+                      <div className="absolute inset-0 bg-orange-500/10 group-hover:bg-transparent transition-colors duration-500 z-10" />
+                      <img
+                        src={project.image}
+                        alt={project.title}
+                        className="w-full h-full object-cover group-hover:scale-110 transition duration-700 ease-out"
+                      />
 
-                    {/* ICON OVERLAY */}
-                    <div className="absolute inset-0 flex items-center justify-center gap-6 bg-black/70 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition duration-500 z-20">
-                      <a
-                        href={project.github}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="p-4 rounded-full bg-white/10 hover:bg-orange-500 hover:text-black hover:scale-110 transition-all duration-300"
-                        onClick={(e) => e.stopPropagation()}
-                      >
-                        <FaGithub className="text-xl" />
-                      </a>
-                      {project.live && project.live !== "#" && (
+                      {/* ONGOING BADGE OVERLAY */}
+                      {project.ongoing && (
+                        <div className="absolute top-4 left-4 z-20">
+                          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-black/80 backdrop-blur-md border border-orange-500/60 text-orange-400 shadow-[0_0_15px_rgba(249,115,22,0.35)]">
+                            <span className="w-2 h-2 rounded-full bg-orange-400 animate-pulse" />
+                            Ongoing
+                          </span>
+                        </div>
+                      )}
+
+                      {/* ICON OVERLAY */}
+                      <div className="absolute inset-0 flex items-center justify-center gap-6 bg-black/70 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition duration-500 z-20">
                         <a
-                          href={project.live}
+                          href={project.github}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="p-4 rounded-full bg-white/10 hover:bg-orange-500 hover:text-black hover:scale-110 transition-all duration-300"
                           onClick={(e) => e.stopPropagation()}
                         >
-                          <FaExternalLinkAlt className="text-lg" />
+                          <FaGithub className="text-xl" />
                         </a>
-                      )}
+                        {project.live && project.live !== "#" && (
+                          <a
+                            href={project.live}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="p-4 rounded-full bg-white/10 hover:bg-orange-500 hover:text-black hover:scale-110 transition-all duration-300"
+                            onClick={(e) => e.stopPropagation()}
+                          >
+                            <FaExternalLinkAlt className="text-lg" />
+                          </a>
+                        )}
+                      </div>
+                    </div>
+
+                    {/* CONTENT */}
+                    <div className="p-6 md:p-8 relative" style={{ transform: "translateZ(20px)" }}>
+                      <div className="absolute top-0 left-8 right-8 h-[1px] bg-gradient-to-r from-transparent via-white/20 to-transparent" />
+                      <div className="flex items-start justify-between gap-2">
+                        <h3 className="text-xl md:text-2xl font-bold text-white group-hover:text-orange-400 transition-colors duration-300">
+                          {project.title}
+                        </h3>
+                      </div>
+                      <p className="mt-3 text-white/60 text-sm md:text-base line-clamp-2">
+                        {project.short}
+                      </p>
                     </div>
                   </div>
 
-                  {/* CONTENT */}
-                  <div className="p-6 md:p-8 relative" style={{ transform: "translateZ(20px)" }}>
-                    <div className="absolute top-0 left-8 right-8 h-[1px] bg-gradient-to-r from-transparent via-white/20 to-transparent" />
-                    <h3 className="text-xl md:text-2xl font-bold text-white group-hover:text-orange-400 transition-colors duration-300">
-                      {project.title}
-                    </h3>
-                    <p className="mt-3 text-white/60 text-sm md:text-base line-clamp-2">
-                      {project.short}
-                    </p>
+                  {/* TECH PILLS */}
+                  <div className="px-6 pb-6 md:px-8 md:pb-8 flex flex-wrap gap-1.5 pt-2" style={{ transform: "translateZ(15px)" }}>
+                    {project.tech.slice(0, 3).map((t, idx) => (
+                      <span
+                        key={idx}
+                        className="px-2.5 py-1 text-[11px] font-medium rounded-lg bg-white/5 border border-white/10 text-white/70"
+                      >
+                        {t}
+                      </span>
+                    ))}
+                    {project.tech.length > 3 && (
+                      <span className="px-2 py-1 text-[11px] font-medium rounded-lg bg-white/5 text-white/40">
+                        +{project.tech.length - 3}
+                      </span>
+                    )}
                   </div>
                 </div>
               </TiltWrapper>
@@ -226,12 +276,20 @@ export default function Projects() {
               {/* Modal Background Glow */}
               <div className="absolute -top-32 -right-32 w-64 h-64 bg-orange-500/20 rounded-full blur-[100px] pointer-events-none" />
               
-              <h3 className="text-3xl font-bold text-white mb-2">
-                {activeProject.title}
-              </h3>
+              <div className="flex items-center gap-3 mb-2 flex-wrap">
+                <h3 className="text-3xl font-bold text-white">
+                  {activeProject.title}
+                </h3>
+                {activeProject.ongoing && (
+                  <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-orange-500/20 border border-orange-500/40 text-orange-400">
+                    <span className="w-2 h-2 rounded-full bg-orange-400 animate-pulse" />
+                    (Ongoing)
+                  </span>
+                )}
+              </div>
               
               <p className="text-orange-400 font-medium mb-6">
-                {activeProject.short}
+                {activeProject.short} {activeProject.ongoing ? "• (Ongoing)" : ""}
               </p>
 
               <p className="text-white/70 leading-relaxed text-base md:text-lg">

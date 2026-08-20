@@ -2,16 +2,16 @@ import { motion } from "framer-motion";
 
 const highlights = [
   {
-    title: "Full Stack Development",
-    desc: "Building scalable web solutions using the MERN stack and Django.",
+    title: "Full Stack & Mobile Development",
+    desc: "Building scalable web & cross-platform mobile solutions using MERN stack, React Native, and Django.",
   },
   {
-    title: "Responsive Design",
-    desc: "Ensuring seamless experiences across all devices and cross-browser compatibility.",
+    title: "AI-Assisted & Vibe Coding",
+    desc: "Rapidly converting ideas and requirements into production-quality products using modern AI tools.",
   },
   {
-    title: "Automation & AI",
-    desc: "Leveraging tools like n8n to build smart automation and AI-powered workflows.",
+    title: "Automation & Intelligent Workflows",
+    desc: "Leveraging tools like n8n, OpenAI API, and smart AI-powered development workflows.",
   },
 ];
 
@@ -41,7 +41,7 @@ export default function About() {
             About <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 via-orange-500 to-orange-600">Me</span>
           </h2>
           <p className="mt-6 max-w-2xl text-white/60 text-lg">
-            A look into my journey as a developer and my commitment to
+            A look into my journey as a developer, AI-assisted vibe coding workflow, and my commitment to
             building high-quality digital products.
           </p>
         </motion.div>
@@ -59,19 +59,23 @@ export default function About() {
             <p className="text-white/80 leading-relaxed text-base md:text-lg">
               I’m <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-orange-600 font-bold">Sivanika S</span>,
               a Software Developer with 1+ year of hands-on experience in designing and building 
-              responsive and user-friendly web applications.
+              responsive, user-friendly, and <span className="text-white font-medium">AI-assisted web and mobile applications</span>.
             </p>
 
+            <div className="mt-6 p-4 rounded-2xl bg-orange-500/[0.07] border border-orange-500/20 text-white/85 leading-relaxed text-base md:text-lg">
+              <span className="text-orange-400 font-semibold">&ldquo;Comfortable working as a &apos;vibe coder,&apos;</span> using AI development tools such as <span className="text-white font-medium">Claude, Claude Code, ChatGPT, Cursor, Lovable, Bolt, and Antigravity</span> to rapidly convert ideas and requirements into working, production-quality products.&rdquo;
+            </div>
+
             <p className="mt-6 text-white/70 leading-relaxed text-base md:text-lg">
-              With a strong foundation in <span className="text-white font-medium">MERN stack development</span>, 
+              With a strong foundation in <span className="text-white font-medium">MERN stack development</span>, <span className="text-white font-medium">React Native</span>, 
               automation workflows, and cross-browser compatibility, I am passionate about 
               developing scalable solutions that solve real-world problems.
             </p>
 
             <p className="mt-6 text-white/60 leading-relaxed text-base md:text-lg">
               My technical journey is driven by a desire to continuously improve my skills 
-              and stay at the forefront of modern web technologies like React.js, Tailwind CSS, 
-              and Django.
+              and stay at the forefront of modern web and mobile technologies like React.js, React Native, Tailwind CSS, 
+              Django, and <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-orange-500 font-medium">AI-powered development workflows</span>.
             </p>
           </motion.div>
 
