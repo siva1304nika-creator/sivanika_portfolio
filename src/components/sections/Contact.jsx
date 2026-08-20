@@ -32,7 +32,7 @@ export default function Contact() {
   return (
     <section
       id="contact"
-      className="relative w-full py-32 overflow-hidden scroll-mt-28"
+      className="relative w-full py-20 md:py-32 overflow-hidden scroll-mt-24"
     >
       <div className="absolute inset-0 bg-gradient-to-b from-black via-black to-[#050505]" />
 
@@ -40,24 +40,24 @@ export default function Contact() {
       <div className="absolute top-0 left-10 w-96 h-96 bg-orange-600/5 rounded-full blur-[150px] pointer-events-none" />
       <div className="absolute bottom-10 right-10 w-96 h-96 bg-orange-500/5 rounded-full blur-[150px] pointer-events-none" />
 
-      <div className="relative max-w-7xl mx-auto px-6 md:px-10">
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 md:px-10">
         {/* HEADER */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="mb-24 text-center md:text-left flex flex-col items-center md:items-start"
+          className="mb-14 md:mb-24 text-center md:text-left flex flex-col items-center md:items-start"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-white tracking-tight">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white tracking-tight font-display">
             Let’s Work <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-orange-600">Together</span>
           </h2>
-          <p className="mt-6 max-w-2xl text-white/60 text-lg">
+          <p className="mt-4 max-w-2xl text-white/60 text-sm sm:text-base md:text-lg leading-relaxed">
             Have a project or opportunity in mind? Send a message and I’ll get back to you.
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-start">
           {/* LEFT CONTENT */}
           <motion.div
             initial={{ opacity: 0, x: -40 }}
@@ -112,9 +112,9 @@ export default function Contact() {
             </div>
 
             <a
-              href="resume/Sivanika-Resume.pdf"
+              href="/resume/Sivanika-Resume.pdf"
               download="Sivanika-Resume.pdf"
-              className="mt-12 inline-flex items-center justify-center w-fit gap-3 px-8 py-4 rounded-full bg-transparent border-2 border-orange-500 text-orange-500 font-bold hover:bg-orange-500 hover:text-black hover:shadow-[0_0_20px_rgba(249,115,22,0.4)] transition-all duration-300"
+              className="mt-8 sm:mt-12 inline-flex items-center justify-center w-full sm:w-fit gap-3 px-8 py-3.5 sm:py-4 rounded-full bg-transparent border-2 border-orange-500 text-orange-500 font-bold hover:bg-orange-500 hover:text-black hover:shadow-[0_0_20px_rgba(249,115,22,0.4)] transition-all duration-300"
             >
               Download Resume
             </a>
@@ -126,17 +126,17 @@ export default function Contact() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, type: "spring", bounce: 0.3 }}
-            className="relative group"
+            className="relative group w-full"
           >
             <div className="absolute inset-0 bg-gradient-to-r from-orange-400/20 to-orange-600/20 blur-[60px] -z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
             
             <form
               ref={formRef}
               onSubmit={sendEmail}
-              className="relative p-8 md:p-10 rounded-[32px] bg-white/[0.02] backdrop-blur-2xl border border-white/10 shadow-[0_0_40px_rgba(0,0,0,0.5)] overflow-hidden"
+              className="relative p-6 sm:p-8 md:p-10 rounded-[24px] sm:rounded-[32px] bg-white/[0.02] backdrop-blur-2xl border border-white/10 shadow-[0_0_40px_rgba(0,0,0,0.5)] overflow-hidden"
             >
               {/* Form Gradient Border */}
-              <div className="absolute inset-0 rounded-[32px] border-2 border-transparent bg-gradient-to-br from-orange-400/50 to-orange-600/50 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" style={{ WebkitMask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)", WebkitMaskComposite: "xor", padding: "1px" }} />
+              <div className="absolute inset-0 rounded-[24px] sm:rounded-[32px] border-2 border-transparent bg-gradient-to-br from-orange-400/50 to-orange-600/50 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" style={{ WebkitMask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)", WebkitMaskComposite: "xor", padding: "1px" }} />
               
               <div className="grid gap-8">
                 <div className="relative group/input">

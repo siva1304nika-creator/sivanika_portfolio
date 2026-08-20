@@ -32,15 +32,15 @@ const certifications = [
 
 export default function Education() {
   return (
-    <section id="education" className="relative w-full py-32 overflow-hidden scroll-mt-28">
+    <section id="education" className="relative w-full py-20 md:py-32 overflow-hidden scroll-mt-24">
       <div className="absolute inset-0 bg-gradient-to-b from-black via-black to-black/90" />
       
       {/* Background blobs for depth */}
       <div className="absolute top-40 left-10 w-96 h-96 bg-orange-600/5 rounded-full blur-[120px] pointer-events-none" />
       <div className="absolute bottom-20 right-10 w-96 h-96 bg-orange-500/5 rounded-full blur-[120px] pointer-events-none" />
 
-      <div className="relative max-w-7xl mx-auto px-6 md:px-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 md:px-10">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
           {/* EDUCATION */}
           <div>
             <motion.div
@@ -48,12 +48,12 @@ export default function Education() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
-              className="mb-12 text-center md:text-left"
+              className="mb-8 md:mb-12 text-center md:text-left"
             >
-              <h2 className="text-4xl font-bold text-white tracking-tight">
+              <h2 className="text-3xl sm:text-4xl font-bold text-white tracking-tight font-display">
                 Academic <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-orange-600">Education</span>
               </h2>
-              <p className="mt-4 text-white/60">My formal academic background and qualifications.</p>
+              <p className="mt-3 text-white/60 text-sm sm:text-base">My formal academic background and qualifications.</p>
             </motion.div>
 
             <div className="space-y-6">

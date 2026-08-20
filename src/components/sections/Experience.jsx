@@ -468,8 +468,11 @@ export default function Experience() {
                 </button>
               </div>
 
-              {/* Scrollable Modal Content */}
-              <div className="flex-1 overflow-y-auto pr-1 sm:pr-2 py-5 space-y-6">
+              {/* Scrollable Modal Content (Scrollbar hidden, scrolling functional) */}
+              <div
+                className="flex-1 overflow-y-auto scrollbar-hide pr-1 sm:pr-2 py-5 space-y-6"
+                style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+              >
                 {/* Title & Organization */}
                 <div>
                   <div className="flex items-center gap-3 flex-wrap">

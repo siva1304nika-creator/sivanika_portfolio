@@ -19,7 +19,7 @@ export default function About() {
   return (
     <section
       id="about"
-      className="relative w-full py-32 overflow-hidden scroll-mt-28"
+      className="relative w-full py-20 md:py-32 overflow-hidden scroll-mt-24"
     >
       {/* background gradient */}
       <div className="absolute inset-0 bg-gradient-to-b from-black via-black to-black/90" />
@@ -28,33 +28,33 @@ export default function About() {
       <div className="absolute top-20 left-10 w-96 h-96 bg-orange-600/5 rounded-full blur-[120px] pointer-events-none" />
       <div className="absolute bottom-20 right-10 w-96 h-96 bg-orange-500/5 rounded-full blur-[120px] pointer-events-none" />
 
-      <div className="relative max-w-7xl mx-auto px-6 md:px-10">
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 md:px-10">
         {/* SECTION HEADER */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="mb-24 text-center md:text-left flex flex-col items-center md:items-start"
+          className="mb-14 md:mb-20 text-center md:text-left flex flex-col items-center md:items-start"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-white tracking-tight">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white tracking-tight font-display">
             About <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 via-orange-500 to-orange-600">Me</span>
           </h2>
-          <p className="mt-6 max-w-2xl text-white/60 text-lg">
+          <p className="mt-4 max-w-2xl text-white/60 text-sm sm:text-base md:text-lg leading-relaxed">
             A look into my journey as a developer, AI-assisted vibe coding workflow, and my commitment to
             building high-quality digital products.
           </p>
         </motion.div>
 
         {/* CONTENT GRID */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-start">
           {/* LEFT — STORY */}
           <motion.div
             initial={{ opacity: 0, x: -40 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.9, type: "spring", bounce: 0.3 }}
-            className="relative p-8 rounded-[32px] bg-white/[0.02] backdrop-blur-2xl border border-white/5 shadow-[0_0_40px_rgba(0,0,0,0.5)]"
+            className="relative p-5 sm:p-8 rounded-[24px] sm:rounded-[32px] bg-white/[0.02] backdrop-blur-2xl border border-white/5 shadow-[0_0_40px_rgba(0,0,0,0.5)]"
           >
             <p className="text-white/80 leading-relaxed text-base md:text-lg">
               I’m <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-orange-600 font-bold">Sivanika S</span>,

@@ -228,7 +228,7 @@ function DottedWorldMap() {
   }, []);
 
   return (
-    <div className="relative w-44 sm:w-52 h-20 flex items-center justify-end select-none pointer-events-none">
+    <div className="relative w-28 xs:w-32 sm:w-44 lg:w-48 h-14 sm:h-18 flex items-center justify-end select-none pointer-events-none flex-shrink-0">
       <canvas
         ref={canvasRef}
         className="w-full h-full object-contain"
@@ -236,7 +236,7 @@ function DottedWorldMap() {
       />
       {/* Animated Ping Ring Over India (Positioned at 78.96°E, 20.59°N => 71.9% X, 38.5% Y) */}
       <div
-        className="absolute w-4 h-4 -translate-x-1/2 -translate-y-1/2 pointer-events-none"
+        className="absolute w-3.5 h-3.5 -translate-x-1/2 -translate-y-1/2 pointer-events-none"
         style={{ left: "71.9%", top: "38.5%" }}
       >
         <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-orange-500 opacity-60" />
@@ -247,6 +247,7 @@ function DottedWorldMap() {
 
 export default function Hero() {
   const [roleIndex, setRoleIndex] = useState(0);
+  const [isImageColored, setIsImageColored] = useState(false);
   const canvasRef = useRef(null);
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
@@ -398,7 +399,7 @@ export default function Hero() {
         mouseX.set(e.clientX);
         mouseY.set(e.clientY);
       }}
-      className="relative min-h-screen lg:h-screen lg:max-h-screen flex flex-col justify-between overflow-hidden bg-black pt-20 pb-3 px-4 sm:px-6 lg:px-10 scroll-mt-24 selection:bg-orange-500 selection:text-black"
+      className="relative min-h-screen lg:h-screen lg:max-h-screen flex flex-col justify-between overflow-hidden bg-black pt-24 sm:pt-28 lg:pt-20 pb-4 lg:pb-3 px-3.5 sm:px-6 lg:px-10 scroll-mt-24 selection:bg-orange-500 selection:text-black"
     >
       {/* Interactive Constellation Canvas */}
       <canvas
@@ -438,11 +439,11 @@ export default function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.15 }}
-              className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl xl:text-6xl text-white leading-none whitespace-nowrap"
+              className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-5xl xl:text-6xl text-white leading-none whitespace-nowrap"
               style={{
                 fontFamily: "'Michroma', sans-serif",
                 fontWeight: 400,
-                letterSpacing: "2px",
+                letterSpacing: "1.5px",
                 textTransform: "uppercase",
               }}
             >
@@ -547,11 +548,21 @@ export default function Hero() {
               {/* Portrait Glass Container */}
               <div className="relative rounded-[32px] overflow-hidden border border-orange-500/30 bg-[#0c0d12]/90 backdrop-blur-2xl shadow-[0_0_45px_rgba(249,115,22,0.18)] p-2">
                 {/* Profile Image Container */}
-                <div className="relative aspect-[4/5] rounded-[26px] overflow-hidden bg-zinc-950">
+                <div
+                  onClick={() => setIsImageColored((prev) => !prev)}
+                  onMouseEnter={() => setIsImageColored(true)}
+                  onMouseLeave={() => setIsImageColored(false)}
+                  className="relative aspect-[4/5] rounded-[26px] overflow-hidden bg-zinc-950 cursor-pointer group/img"
+                  title="Click or tap to view original photo"
+                >
                   <img
                     src={profileImg}
                     alt="Sivanika S - AI Software Developer"
-                    className="w-full h-full object-cover grayscale brightness-95 hover:grayscale-0 hover:brightness-105 transition-all duration-700 ease-out"
+                    className={`w-full h-full object-cover transition-all duration-500 ease-out ${
+                      isImageColored
+                        ? "grayscale-0 brightness-105 scale-[1.02]"
+                        : "grayscale brightness-95 group-hover/img:grayscale-0 group-hover/img:brightness-105 group-hover/img:scale-[1.02] active:grayscale-0 active:brightness-105"
+                    }`}
                   />
 
                   {/* Subtle Lighting Overlay */}
@@ -636,23 +647,23 @@ export default function Hero() {
 
       {/* ================= BOTTOM 4 STATISTICS & INFO CARDS ================= */}
       <div className="max-w-7xl mx-auto w-full relative z-10 pt-2 pb-2">
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-3 md:gap-4">
           {/* Card 1: EXPERIENCE */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="p-4 rounded-2xl bg-[#0c0d12]/90 border border-zinc-800/80 backdrop-blur-xl hover:border-orange-500/30 hover:shadow-[0_0_20px_rgba(249,115,22,0.1)] transition-all duration-300 flex flex-col justify-between"
+            className="p-3 sm:p-4 rounded-2xl bg-[#0c0d12]/90 border border-zinc-800/80 backdrop-blur-xl hover:border-orange-500/30 hover:shadow-[0_0_20px_rgba(249,115,22,0.1)] transition-all duration-300 flex flex-col justify-between"
           >
-            <div className="flex items-center gap-1.5 text-xs font-bold text-orange-400 tracking-wider uppercase font-mono mb-2">
-              <Briefcase className="w-3.5 h-3.5 text-orange-500" />
+            <div className="flex items-center gap-1.5 text-[10px] sm:text-xs font-bold text-orange-400 tracking-wider uppercase font-mono mb-1 sm:mb-2">
+              <Briefcase className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-orange-500" />
               <span>EXPERIENCE</span>
             </div>
             <div>
-              <span className="text-3xl lg:text-4xl font-black text-orange-500 tracking-tight block font-display">
+              <span className="text-2xl sm:text-3xl lg:text-4xl font-black text-orange-500 tracking-tight block font-display">
                 01+
               </span>
-              <span className="text-[11px] font-bold text-zinc-400 uppercase tracking-wider block mt-1 font-mono">
+              <span className="text-[9px] sm:text-[11px] font-bold text-zinc-400 uppercase tracking-wider block mt-0.5 sm:mt-1 font-mono">
                 YEARS EXPERIENCE
               </span>
             </div>
@@ -663,17 +674,17 @@ export default function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="p-4 rounded-2xl bg-[#0c0d12]/90 border border-zinc-800/80 backdrop-blur-xl hover:border-orange-500/30 hover:shadow-[0_0_20px_rgba(249,115,22,0.1)] transition-all duration-300 flex flex-col justify-between"
+            className="p-3 sm:p-4 rounded-2xl bg-[#0c0d12]/90 border border-zinc-800/80 backdrop-blur-xl hover:border-orange-500/30 hover:shadow-[0_0_20px_rgba(249,115,22,0.1)] transition-all duration-300 flex flex-col justify-between"
           >
-            <div className="flex items-center gap-1.5 text-xs font-bold text-orange-400 tracking-wider uppercase font-mono mb-2">
-              <FolderGit2 className="w-3.5 h-3.5 text-orange-500" />
+            <div className="flex items-center gap-1.5 text-[10px] sm:text-xs font-bold text-orange-400 tracking-wider uppercase font-mono mb-1 sm:mb-2">
+              <FolderGit2 className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-orange-500" />
               <span>PROJECTS</span>
             </div>
             <div>
-              <span className="text-3xl lg:text-4xl font-black text-orange-500 tracking-tight block font-display">
+              <span className="text-2xl sm:text-3xl lg:text-4xl font-black text-orange-500 tracking-tight block font-display">
                 06+
               </span>
-              <span className="text-[11px] font-bold text-zinc-400 uppercase tracking-wider block mt-1 font-mono">
+              <span className="text-[9px] sm:text-[11px] font-bold text-zinc-400 uppercase tracking-wider block mt-0.5 sm:mt-1 font-mono">
                 PROJECTS BUILT
               </span>
             </div>
@@ -684,34 +695,34 @@ export default function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
-            className="p-4 rounded-2xl bg-[#0c0d12]/90 border border-zinc-800/80 backdrop-blur-xl hover:border-orange-500/30 hover:shadow-[0_0_20px_rgba(249,115,22,0.1)] transition-all duration-300 flex flex-col justify-between"
+            className="p-3 sm:p-4 rounded-2xl bg-[#0c0d12]/90 border border-zinc-800/80 backdrop-blur-xl hover:border-orange-500/30 hover:shadow-[0_0_20px_rgba(249,115,22,0.1)] transition-all duration-300 flex flex-col justify-between"
           >
-            <div className="flex items-center gap-1.5 text-xs font-bold text-orange-400 tracking-wider uppercase font-mono mb-2">
-              <Layers className="w-3.5 h-3.5 text-orange-500" />
+            <div className="flex items-center gap-1.5 text-[10px] sm:text-xs font-bold text-orange-400 tracking-wider uppercase font-mono mb-1 sm:mb-2">
+              <Layers className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-orange-500" />
               <span>TECHNOLOGIES</span>
             </div>
             <div>
-              <div className="flex items-center gap-1.5 flex-wrap my-1">
-                <div className="w-7 h-7 rounded-lg bg-zinc-900 border border-zinc-800 flex items-center justify-center">
-                  <FaReact className="w-3.5 h-3.5 text-[#61DAFB]" />
+              <div className="flex items-center gap-1 sm:gap-1.5 flex-wrap my-0.5 sm:my-1">
+                <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-lg bg-zinc-900 border border-zinc-800 flex items-center justify-center">
+                  <FaReact className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[#61DAFB]" />
                 </div>
-                <div className="w-7 h-7 rounded-lg bg-zinc-900 border border-zinc-800 flex items-center justify-center">
-                  <FaNodeJs className="w-3.5 h-3.5 text-[#68A063]" />
+                <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-lg bg-zinc-900 border border-zinc-800 flex items-center justify-center">
+                  <FaNodeJs className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[#68A063]" />
                 </div>
-                <div className="w-7 h-7 rounded-lg bg-zinc-900 border border-zinc-800 flex items-center justify-center">
-                  <SiMongodb className="w-3.5 h-3.5 text-[#47A248]" />
+                <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-lg bg-zinc-900 border border-zinc-800 flex items-center justify-center">
+                  <SiMongodb className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[#47A248]" />
                 </div>
-                <div className="w-7 h-7 rounded-lg bg-zinc-900 border border-zinc-800 flex items-center justify-center">
-                  <span className="text-[10px] font-bold text-white font-mono">dj</span>
+                <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-lg bg-zinc-900 border border-zinc-800 flex items-center justify-center">
+                  <span className="text-[9px] sm:text-[10px] font-bold text-white font-mono">dj</span>
                 </div>
-                <div className="w-7 h-7 rounded-lg bg-zinc-900 border border-zinc-800 flex items-center justify-center">
-                  <SiTailwindcss className="w-3.5 h-3.5 text-[#38BDF8]" />
+                <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-lg bg-zinc-900 border border-zinc-800 flex items-center justify-center">
+                  <SiTailwindcss className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[#38BDF8]" />
                 </div>
-                <div className="w-7 h-7 rounded-lg bg-zinc-900 border border-zinc-800 flex items-center justify-center">
-                  <span className="text-xs text-zinc-400 font-bold font-mono">+</span>
+                <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-lg bg-zinc-900 border border-zinc-800 flex items-center justify-center">
+                  <span className="text-[10px] sm:text-xs text-zinc-400 font-bold font-mono">+</span>
                 </div>
               </div>
-              <span className="text-[11px] text-zinc-500 block mt-1 font-medium font-sans">
+              <span className="text-[10px] sm:text-[11px] text-zinc-500 block mt-0.5 sm:mt-1 font-medium font-sans">
                 and more...
               </span>
             </div>
@@ -722,17 +733,17 @@ export default function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}
-            className="p-4 rounded-2xl bg-[#0c0d12]/90 border border-zinc-800/80 backdrop-blur-xl hover:border-orange-500/30 hover:shadow-[0_0_20px_rgba(249,115,22,0.1)] transition-all duration-300 flex items-center justify-between"
+            className="p-3 sm:p-4 rounded-2xl bg-[#0c0d12]/90 border border-zinc-800/80 backdrop-blur-xl hover:border-orange-500/30 hover:shadow-[0_0_20px_rgba(249,115,22,0.1)] transition-all duration-300 flex items-center justify-between overflow-hidden"
           >
-            <div>
-              <div className="flex items-center gap-1.5 text-xs font-bold text-orange-400 tracking-wider uppercase font-mono mb-1.5">
-                <MapPin className="w-3.5 h-3.5 text-orange-500" />
+            <div className="flex-1 pr-1">
+              <div className="flex items-center gap-1 sm:gap-1.5 text-[10px] sm:text-xs font-bold text-orange-400 tracking-wider uppercase font-mono mb-0.5 sm:mb-1.5">
+                <MapPin className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-orange-500" />
                 <span>LOCATION</span>
               </div>
-              <span className="text-base font-bold text-orange-400 block leading-tight font-display">
+              <span className="text-sm sm:text-base font-bold text-orange-400 block leading-tight font-display">
                 India
               </span>
-              <span className="text-[11px] text-zinc-400 block mt-0.5 font-sans">
+              <span className="text-[9px] sm:text-[11px] text-zinc-400 block mt-0.5 font-sans leading-snug">
                 Open to Remote Opportunities
               </span>
             </div>

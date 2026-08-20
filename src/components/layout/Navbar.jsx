@@ -82,28 +82,28 @@ export default function Navbar() {
         initial={{ y: -20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.6, ease: "easeOut" }}
-        className="fixed top-0 left-0 right-0 z-50 px-4 md:px-10 py-4 transition-all duration-300 pointer-events-none"
+        className="fixed top-0 left-0 right-0 z-50 px-3 sm:px-6 md:px-10 py-3 sm:py-4 transition-all duration-300 pointer-events-none"
       >
         <div
-          className={`max-w-7xl mx-auto flex items-center justify-between px-6 py-2.5 rounded-2xl transition-all duration-500 pointer-events-auto ${
+          className={`max-w-7xl mx-auto flex items-center justify-between px-3.5 sm:px-6 py-2 sm:py-2.5 rounded-2xl transition-all duration-500 pointer-events-auto ${
             isScrolled
-              ? "bg-black/80 backdrop-blur-2xl border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.9)]"
-              : "bg-transparent"
+              ? "bg-black/90 backdrop-blur-2xl border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.9)]"
+              : "bg-black/40 backdrop-blur-xl border border-white/[0.08]"
           }`}
         >
           {/* Brand Logo */}
           <div
             onClick={() => handleScroll("home")}
-            className="flex items-center gap-3 cursor-pointer group select-none"
+            className="flex items-center gap-2 sm:gap-3 cursor-pointer group select-none flex-shrink-0"
           >
-            <div className="w-9 h-9 rounded-xl border border-orange-500/40 bg-zinc-950/80 flex items-center justify-center text-orange-500 font-extrabold text-base shadow-[0_0_15px_rgba(249,115,22,0.3)] group-hover:shadow-[0_0_20px_rgba(249,115,22,0.6)] group-hover:scale-105 transition-all">
+            <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl border border-orange-500/40 bg-zinc-950/80 flex items-center justify-center text-orange-500 font-extrabold text-sm sm:text-base shadow-[0_0_15px_rgba(249,115,22,0.3)] group-hover:shadow-[0_0_20px_rgba(249,115,22,0.6)] group-hover:scale-105 transition-all">
               S
             </div>
             <div
-              className="text-sm sm:text-base text-white font-normal"
+              className="text-xs xs:text-sm sm:text-base text-white font-normal whitespace-nowrap tracking-wide"
               style={{
                 fontFamily: "'Michroma', sans-serif",
-                letterSpacing: "1.5px",
+                letterSpacing: "1px",
                 textTransform: "uppercase",
               }}
             >
@@ -145,16 +145,17 @@ export default function Navbar() {
             })}
           </nav>
 
-          {/* Right Action: ⌘ K Command Palette */}
-          <div className="flex items-center gap-3">
+          {/* Right Action: ⌘ K Command Palette & Mobile Hamburger */}
+          <div className="flex items-center gap-2 sm:gap-3">
             <button
               onClick={() => setPaletteOpen(true)}
-              className="relative flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-zinc-950/80 border border-zinc-800 hover:border-orange-500/50 hover:bg-orange-500/10 transition-all text-zinc-300 hover:text-white text-xs font-mono group cursor-pointer shadow-[0_0_15px_rgba(0,0,0,0.5)]"
+              className="relative flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3.5 py-1.5 rounded-xl bg-zinc-950/80 border border-zinc-800 hover:border-orange-500/50 hover:bg-orange-500/10 transition-all text-zinc-300 hover:text-white text-xs font-mono group cursor-pointer shadow-[0_0_15px_rgba(0,0,0,0.5)]"
+              title="Command Palette (⌘K)"
             >
               {/* Notification orange dot */}
               <span className="absolute -top-1 -right-1 w-2 h-2 rounded-full bg-orange-500 shadow-[0_0_8px_#f97316]" />
               <Command className="w-3.5 h-3.5 text-orange-400 group-hover:scale-110 transition-transform" />
-              <span className="text-[11px] font-medium text-zinc-400 group-hover:text-white tracking-wide">
+              <span className="hidden sm:inline text-[11px] font-medium text-zinc-400 group-hover:text-white tracking-wide">
                 Command Palette
               </span>
             </button>
@@ -162,7 +163,8 @@ export default function Navbar() {
             {/* Mobile Hamburger Toggle */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="lg:hidden p-2 rounded-xl bg-zinc-900 border border-zinc-800 text-zinc-300 hover:text-white"
+              className="lg:hidden p-2 rounded-xl bg-zinc-900 border border-zinc-800 text-zinc-300 hover:text-white flex items-center justify-center"
+              aria-label="Toggle Navigation Menu"
             >
               {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>

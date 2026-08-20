@@ -12,14 +12,14 @@ export default function MarketingTeaser() {
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-orange-950/10 to-transparent pointer-events-none" />
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[350px] bg-orange-600/10 rounded-full blur-[140px] pointer-events-none" />
 
-      <div className="relative max-w-7xl mx-auto px-6 md:px-10">
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 md:px-10">
         <TiltWrapper maxRotation={5} zTranslate={15}>
-          <div className="relative rounded-[32px] p-8 md:p-14 bg-gradient-to-br from-zinc-900/90 via-zinc-950/80 to-black border border-white/10 backdrop-blur-2xl shadow-[0_20px_60px_rgba(0,0,0,0.8)] overflow-hidden">
+          <div className="relative rounded-[28px] sm:rounded-[32px] p-6 sm:p-8 md:p-14 bg-gradient-to-br from-zinc-900/90 via-zinc-950/80 to-black border border-white/10 backdrop-blur-2xl shadow-[0_20px_60px_rgba(0,0,0,0.8)] overflow-hidden">
             {/* Ambient border highlight */}
             <div className="absolute top-0 right-0 -mr-20 -mt-20 w-80 h-80 bg-orange-500/15 rounded-full blur-3xl pointer-events-none" />
             <div className="absolute bottom-0 left-0 -ml-20 -mb-20 w-80 h-80 bg-amber-500/10 rounded-full blur-3xl pointer-events-none" />
 
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center relative z-10">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center relative z-10">
               {/* Left Details */}
               <div className="lg:col-span-7 flex flex-col items-start">
                 <motion.div
@@ -27,7 +27,7 @@ export default function MarketingTeaser() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.6 }}
-                  className="flex items-center gap-2 px-4 py-1.5 rounded-full bg-orange-500/10 border border-orange-500/25 text-orange-400 text-xs font-semibold uppercase tracking-widest mb-6"
+                  className="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-orange-500/10 border border-orange-500/25 text-orange-400 text-xs font-semibold uppercase tracking-widest mb-4 sm:mb-6"
                 >
                   <Sparkles className="w-3.5 h-3.5" />
                   Collaborative Agency Services
@@ -38,7 +38,7 @@ export default function MarketingTeaser() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.6, delay: 0.1 }}
-                  className="text-3xl md:text-5xl font-extrabold text-white tracking-tight leading-tight"
+                  className="text-2xl sm:text-3xl md:text-5xl font-extrabold text-white tracking-tight leading-tight font-display"
                 >
                   Looking to Scale Your Online Presence?{" "}
                   <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 via-orange-500 to-amber-400">
@@ -51,7 +51,7 @@ export default function MarketingTeaser() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.6, delay: 0.2 }}
-                  className="mt-5 text-white/65 text-base md:text-lg leading-relaxed max-w-xl"
+                  className="mt-4 sm:mt-5 text-white/65 text-sm sm:text-base md:text-lg leading-relaxed max-w-xl"
                 >
                   Beyond software engineering, I partner with digital marketing specialists to deliver end-to-end Technical SEO, Google/Meta Ads campaigns, high-converting copy, and ROI analytics for growing businesses.
                 </motion.p>

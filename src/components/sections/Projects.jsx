@@ -131,7 +131,7 @@ export default function Projects() {
   return (
     <section
       id="projects"
-      className="relative w-full py-32 overflow-hidden scroll-mt-28"
+      className="relative w-full py-20 md:py-32 overflow-hidden scroll-mt-24"
     >
       <div className="absolute inset-0 bg-gradient-to-b from-black via-black to-black/90" />
       
@@ -139,25 +139,25 @@ export default function Projects() {
       <div className="absolute top-1/2 left-10 w-96 h-96 bg-orange-600/5 rounded-full blur-[150px] pointer-events-none -translate-y-1/2" />
       <div className="absolute bottom-20 right-10 w-96 h-96 bg-orange-500/5 rounded-full blur-[150px] pointer-events-none" />
 
-      <div className="relative max-w-7xl mx-auto px-6 md:px-10">
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 md:px-10">
         {/* HEADER */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="mb-24 text-center flex flex-col items-center"
+          className="mb-14 md:mb-24 text-center flex flex-col items-center"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-white tracking-tight">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white tracking-tight font-display">
             Featured <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-orange-600">Projects</span>
           </h2>
-          <p className="mt-6 max-w-2xl text-white/60 text-lg">
+          <p className="mt-4 max-w-2xl text-white/60 text-sm sm:text-base md:text-lg leading-relaxed">
             Selected work showcasing full-stack engineering, AI voice automation, React Native mobile apps, and interactive web applications.
           </p>
         </motion.div>
 
         {/* PROJECT GRID */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
           {projects.map((project, i) => (
             <motion.div
               key={project.title}
@@ -271,7 +271,7 @@ export default function Projects() {
               exit={{ scale: 0.95, opacity: 0, y: 20 }}
               transition={{ type: "spring", bounce: 0.3 }}
               onClick={(e) => e.stopPropagation()}
-              className="max-w-xl w-full p-8 md:p-10 rounded-[32px] bg-[#0f0f0f] border border-white/10 shadow-[0_0_50px_rgba(249,115,22,0.15)] relative overflow-hidden"
+              className="max-w-xl w-full p-6 sm:p-8 md:p-10 rounded-[28px] sm:rounded-[32px] bg-[#0f0f0f] border border-white/10 shadow-[0_0_50px_rgba(249,115,22,0.15)] relative overflow-hidden max-h-[90vh] overflow-y-auto scrollbar-hide"
             >
               {/* Modal Background Glow */}
               <div className="absolute -top-32 -right-32 w-64 h-64 bg-orange-500/20 rounded-full blur-[100px] pointer-events-none" />
