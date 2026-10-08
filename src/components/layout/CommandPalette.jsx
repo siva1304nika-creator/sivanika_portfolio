@@ -111,8 +111,8 @@ export default function CommandPalette({ isOpen, onClose }) {
           icon: FileDown,
           action: () => {
             const link = document.createElement("a");
-            link.href = "/resume/Sivanika-Resume.pdf";
-            link.download = "Sivanika-Resume.pdf";
+            link.href = "/resume/Sivanika_Resume.pdf";
+            link.download = "Sivanika_Resume.pdf";
             link.click();
             onClose();
           },

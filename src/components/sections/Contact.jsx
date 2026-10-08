@@ -112,8 +112,8 @@ export default function Contact() {
             </div>
 
             <a
-              href="/resume/Sivanika-Resume.pdf"
-              download="Sivanika-Resume.pdf"
+              href="/resume/Sivanika_Resume.pdf"
+              download="Sivanika_Resume.pdf"
               className="mt-8 sm:mt-12 inline-flex items-center justify-center w-full sm:w-fit gap-3 px-8 py-3.5 sm:py-4 rounded-full bg-transparent border-2 border-orange-500 text-orange-500 font-bold hover:bg-orange-500 hover:text-black hover:shadow-[0_0_20px_rgba(249,115,22,0.4)] transition-all duration-300"
             >
               Download Resume

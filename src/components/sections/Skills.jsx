@@ -519,8 +519,8 @@ export default function Skills() {
             {/* Download Resume Button */}
             <div className="pt-4">
               <a
-                href="/resume/Sivanika-Resume.pdf"
-                download="Sivanika-Resume.pdf"
+                href="/resume/Sivanika_Resume.pdf"
+                download="Sivanika_Resume.pdf"
                 className="w-full py-3.5 px-6 rounded-xl border border-orange-500/30 bg-zinc-950/80 hover:bg-orange-500/15 text-white font-bold text-xs tracking-wider uppercase flex items-center justify-center gap-2.5 transition-all duration-300 shadow-[0_0_25px_-5px_rgba(249,115,22,0.25)] hover:border-orange-500/70 hover:shadow-[0_0_35px_rgba(249,115,22,0.4)] group"
               >
                 <Download className="w-4 h-4 text-orange-400 group-hover:translate-y-0.5 transition-transform duration-300" />

@@ -496,8 +496,8 @@ export default function Hero() {
 
               {/* Secondary Button: ↓ DOWNLOAD RESUME */}
               <a
-                href="/resume/Sivanika-Resume.pdf"
-                download="Sivanika-Resume.pdf"
+                href="/resume/Sivanika_Resume.pdf"
+                download="Sivanika_Resume.pdf"
                 className="px-6 py-3 rounded-xl bg-zinc-950/80 border border-zinc-800 hover:border-orange-500/50 text-white font-bold text-xs uppercase tracking-wider hover:bg-orange-500/10 hover:shadow-[0_0_20px_rgba(249,115,22,0.2)] hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 flex items-center gap-2 cursor-pointer"
               >
                 <Download className="w-3.5 h-3.5 text-orange-400" />
